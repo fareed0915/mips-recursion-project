@@ -1,0 +1,9 @@
+.data 
+    Stack1: .space 160
+    Stack2: .space 160
+    Stack3: .space 160
+    Stack4: .space 160
+    Stack5: .space 160
+    SizeStack: .word 40
+    StringInput: .space 101
+    naan: .asciiz "Invalid input"
