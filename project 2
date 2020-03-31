@@ -229,3 +229,40 @@ jal convert_to_ascii #ascii value to decimal
     j initialize3
 
     end_initialize3:
+ multi: 
+    # Stack5 * Stack4 = Stack2
+    beq $t4, $zero, multiEnd
+    li $t2, 160
+    li $t5, 0
+
+    multiIn:
+    beq $t2, $zero multiInEnd
+    li $t7, 160
+    sub $t7, $t7, $t2
+    li $s2, 8
+    sub $s2, $s2, $t4
+    la $s7, Stack5
+    la $t0, Stack4
+    add $s7, $s7, $t7
+    lw $t7, 0($s7)
+    add $t0, $t0, $s2
+    lw $s2, 0($t0)
+
+    mul $t7, $t7, $s2
+    add $t7, $t7, $t5
+    li $s2, 10
+    div $t7, $s2
+    mfhi $s2 # remainder
+    mflo $t5 # quotient
+    la $s7, Stack3
+    add $s7, $s7, $s3
+    sw $s2, 0($s7)
+
+    addi $s3, $s3, 4 #increment
+    addi $t2, $t2, -4
+    j multiIn
+
+    multiInEnd:
+
+    li $t2, 160
+    li $t7, 0 
