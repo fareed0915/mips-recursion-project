@@ -7,3 +7,19 @@
     SizeStack: .word 40
     StringInput: .space 101
     naan: .asciiz "Invalid input"
+.text
+main: 
+    li $t5, 2895579    # HU ID
+    li $t4, 11
+    div $t5, $t4 
+    mfhi $t5 # module 11
+    addi $s0, $t5, 26 
+    addiu $t3, $s0, -10
+
+   
+    li $v0, 8
+    la $a0, StringInput
+    li $a1, 101
+    syscall
+
+    li $t9, 0
