@@ -63,3 +63,23 @@ end_FirstLoop_no.2:
     li $s4, 0
     addi $t0, $t0, -1
     add $s4, $s4, $t0
+    SecondLoop:
+
+    la $a1, StringInput
+    add $a1, $a1, $s4
+    lb $a1, 0($a1) # ord(str[index])
+
+
+    li $t5, 32
+    li $s2, 9
+    seq $t5, $a1, $t5
+    seq $s2, $a1, $s2
+    or $t5, $t5, $s2
+    beq $t5, $zero, end_SecondLoop
+
+    addi $s4, $s4, -1       # decrement
+    li $t4, -1
+    sgt $t5, $s4, $t4
+    bne $t5, $zero, SecondLoop 
+
+end_SecondLoop:
