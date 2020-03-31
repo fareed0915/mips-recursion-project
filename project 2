@@ -295,3 +295,32 @@ addition:
     li $s3, 4
     addi $t4, $t4, -4 # decrement
     j multi
+ multiEnd:
+    addi $t1, $t1, -1
+    j exponent
+
+    end_exponent:
+    lw $t5, SizeStack # size
+    la $t7, Stack4
+    li $s2, 0 # count
+
+    initialize4:
+    beq $s2, $t5, end_initialize4
+    sw $zero, 0($t7)
+    addi $t7, $t7, 4
+    addi $s2, $s2, 1
+    j initialize4
+
+    end_initialize4:
+    la $t5, Stack4
+    li $t4, 10
+    div $t6, $t4
+    mfhi $t4
+    mflo $s3 
+    sw $t4, 0($t5)
+    sw $s3, 4($t5)
+
+    lw $t2, SizeStack
+    la $t7, Stack2
+    la $s2, Stack5
+    li $s7, 0
