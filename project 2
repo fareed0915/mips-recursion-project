@@ -23,3 +23,25 @@ main:
     syscall
 
     li $t9, 0
+FirstLoop:
+    la $a1, StringInput
+    add $a1, $a1, $t9
+    lb $a1, 0($a1) # $a1 = ord(str[i])
+
+    li $t5, 32
+    li $s2, 9
+    seq $t5, $a1, $t5
+    seq $s2, $a1, $s2
+    or $t5, $t5, $s2
+    beq $t5, $zero, end_FirstLoop 
+        
+    addi $t9, $t9, 1        #increment
+    li $t4, 101
+    slt $t5, $t9, $t4 
+    bne $t5, $zero, FirstLoop   #continue
+    
+    j invalid_input
+
+end_FirstLoop:
+    li $t0, 0
+    add $t0, $t9, $zero 
