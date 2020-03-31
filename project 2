@@ -105,3 +105,27 @@ back:
     addi $t7, $t7, 156
     addi $s2, $zero, 1 # count = 0
     li $t4, 0
+ print:
+    beq $s2, $t5, end_print
+    lw $a0, 0($t7)
+    bne $a0, $zero, branch
+
+    branchBack:
+    beq $t4, $zero, skip_print
+
+    # if print
+    syscall
+
+    skip_print:
+    addi $t7, $t7, -4
+    addi $s2, $s2, 1
+    j print
+
+    end_print:
+    lw $a0, 0($t7)
+    syscall
+    j exit
+
+    branch:
+    li $t4, 1
+    j branchBack
