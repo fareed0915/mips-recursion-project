@@ -446,3 +446,28 @@ copy2:
     bne $s5, $s6, subprogram_loop
         
     j back
+convert_to_ascii:
+    # parameter $t6
+    # return $t6
+    li $t2, 64
+    li $t7, 65
+    add $t7, $t3, $t7
+    sgt $t5, $t6, $t2 
+    slt $t4, $t6, $t7   
+    and $t5, $t5, $t4 
+    bne $t5, $zero, caps
+
+    li $t2, 96
+    li $t7, 97
+    add $t7, $t7, $t3
+    sgt $t5, $t6, $t2
+    slt $t4, $t6, $t7
+    and $t5, $t5, $t4 
+    bne $t5, $zero, small
+
+    li $t2, 47
+    li $t7, 58
+    sgt $t5, $t6, $t2
+    slt $t4, $t6, $t7
+    and $t5, $t5, $t4 
+    bne $t5, $zero, number
