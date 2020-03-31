@@ -194,3 +194,38 @@ jal convert_to_ascii #ascii value to decimal
     li $t5, 1
     la $t4, Stack2
     sw $t5, 0($t4)
+  exponent:
+    # parameters Stack4, $t1
+    # return in Stack2
+    beq $t1, $zero end_exponent
+    li $t5, 0 # carry
+    li $t4, 8 # count i
+    li $s3, 0 # Stack3 index
+    # put values Stack2 in Stack5
+    lw $t2, SizeStack
+    la $t7, Stack2
+    la $s2, Stack5
+    li $s7, 0
+
+    copy:
+    beq $s7, $t2, end_copy
+    lw $t0, 0($t7)
+    sw $t0, 0($s2)
+    addi $t7, $t7, 4
+    addi $s2, $s2, 4
+    addi $s7, $s7, 1
+    j copy
+
+    end_copy:
+    lw $t5, SizeStack # array size
+    la $t7, Stack2
+    li $s2, 0 #count
+
+    initialize3:
+    beq $s2, $t5, end_initialize3
+    sw $zero, 0($t7)
+    addi $t7, $t7, 4
+    addi $s2, $s2, 1
+    j initialize3
+
+    end_initialize3:
