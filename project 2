@@ -471,3 +471,24 @@ convert_to_ascii:
     slt $t4, $t6, $t7
     and $t5, $t5, $t4 
     bne $t5, $zero, number
+    j invalid_input
+
+    small:
+    addiu $t6, $t6, -87
+    jr $ra
+    caps:
+    addiu $t6, $t6, -55
+    jr $ra
+    number:
+    addiu $t6, $t6, -48
+    jr $ra
+
+invalid_input:
+    li $v0, 4
+    la $a0, naan
+    syscall
+    j exit
+
+exit:
+    li $v0, 10
+    syscall
