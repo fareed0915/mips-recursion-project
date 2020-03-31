@@ -154,3 +154,22 @@ subprogram:
     j initialize
 
     end_initialize:
+ li $t5, 10
+    div $s0, $t5
+    mfhi $t5
+    mflo $t4
+    la $s3, Stack4
+    sw $t5, 0($s3)
+    sw $t4, 4($s3)
+
+    subprogram_loop:
+    li $t5, 10
+    div $s0, $t5
+    mfhi $t5
+    mflo $t4
+    la $s3, Stack4
+    sw $t5, 0($s3)
+    sw $t4, 4($s3)
+    la $a1, StringInput
+    add $a1, $a1, $s5
+    lb $t6, 0($a1)
