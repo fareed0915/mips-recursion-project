@@ -173,3 +173,24 @@ subprogram:
     la $a1, StringInput
     add $a1, $a1, $s5
     lb $t6, 0($a1)
+jal convert_to_ascii #ascii value to decimal
+    # parameter $t6 
+    # returns val $t6
+
+    sub $t1, $s4, $s5
+    #initialize Stack2 with 01
+    lw $t5, SizeStack # size
+    la $t7, Stack2
+    li $s2, 0 # count
+
+    initialize2:
+    beq $s2, $t5, end_initialize2
+    sw $zero, 0($t7)
+    addi $t7, $t7, 4
+    addi $s2, $s2, 1
+    j initialize2
+
+    end_initialize2:
+    li $t5, 1
+    la $t4, Stack2
+    sw $t5, 0($t4)
